@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const dbName = process.env.DB_NAME;
-const dbPass = process.env.DB_PWD;
+const dbName = process.env.CLIENT_DB_NAME;
+const dbPass = process.env.CLIENT_DB_PWD;
 const UNAME = process.env.UNAME;
 const CL_PWD = process.env.CL_PWD;
 

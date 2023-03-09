@@ -1,2 +1,0 @@
-//! User Routes
-//! User Model
