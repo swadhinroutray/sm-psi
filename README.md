@@ -26,7 +26,9 @@
 
 ```
 $ ./Taskfile.sh installAPI          # Installs the dependencies
+$ ./Taskfile.sh startUI             # Starts Client UI
 $ ./Taskfile.sh                     # Starts Client and Server concurrently
+
 ```
 
 <hr>

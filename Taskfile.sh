@@ -20,4 +20,8 @@ startServer() {
 
 }
 
+startUI(){
+    cd web && npm start
+}
+
 "${@:-default}"
