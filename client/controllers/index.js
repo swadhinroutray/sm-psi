@@ -1,7 +1,8 @@
 const { hello } = require("./hello");
-const { keySetup } = require("./intersection");
+const { keySetup, getKeys } = require("./keysetup");
 
 module.exports = {
   hello,
   keySetup,
+  getKeys,
 };

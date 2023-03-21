@@ -5,6 +5,6 @@ const controller = require("../controllers/index");
 router.get("/hello", controller.hello);
 
 //* Intersection Logic
-router.post("/setupkeys", controller.keySetup);
-
+router.post("/keysetup", controller.keySetup);
+router.get("/getkeys", controller.getKeys);
 module.exports = router;

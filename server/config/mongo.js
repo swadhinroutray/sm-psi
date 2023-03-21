@@ -3,7 +3,6 @@ const dbName = process.env.SERVER_DB_NAME;
 const dbPass = process.env.SERVER_DB_PWD;
 const UNAME = process.env.UNAME;
 const CL_PWD = process.env.CL_PWD;
-
 function connectMongo() {
   try {
     var mongouri = `mongodb://localhost:27017/${dbName}:${dbPass}`; //! For Local Dev
