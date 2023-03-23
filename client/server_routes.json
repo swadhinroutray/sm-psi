@@ -1,3 +1,4 @@
 {
-  "keysetup": "http://127.0.0.1:8001/api/keysetup"
+  "keysetup": "http://127.0.0.1:8001/api/keysetup",
+  "intersection": "http://127.0.0.1:8001/api/intersection"
 }

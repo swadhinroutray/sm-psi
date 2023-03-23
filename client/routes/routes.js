@@ -7,4 +7,5 @@ router.get("/hello", controller.hello);
 //* Intersection Logic
 router.post("/keysetup", controller.keySetup);
 router.get("/getkeys", controller.getKeys);
+router.post("/intersection", controller.intersectionCall);
 module.exports = router;

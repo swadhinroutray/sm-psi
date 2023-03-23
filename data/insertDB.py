@@ -24,7 +24,7 @@ with open('db1.csv') as f:
     reader = csv.reader(f)
     for row in reader:
         youtuberObj = {
-        "Rank" : int(row[0]),
+        "Rank" : (row[0]),
 	    "username" : row[1],
 	    "Youtube Url" : row[2],
 	    "Name" : row[3],
@@ -41,7 +41,7 @@ with open('db2.csv') as f:
     reader = csv.reader(f)
     for row in reader:
         youtuberObj = {
-        "Rank" : int(row[0]),
+        "Rank" : (row[0]),
 	    "username" : row[1],
 	    "Youtube Url" : row[2],
 	    "Name" : row[3],

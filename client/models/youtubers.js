@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const youtuberSchema = new mongoose.Schema({
   Rank: {
-    type: Number,
+    type: String,
     required: true,
   },
   username: {
