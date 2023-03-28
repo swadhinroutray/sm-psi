@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import * as mongoose from "mongoose";
 
 const keySchema = new mongoose.Schema({
   fpr: {
@@ -24,6 +24,4 @@ const keySchema = new mongoose.Schema({
 });
 
 const key = mongoose.model("keys", keySchema);
-module.exports = {
-  key,
-};
+export default key;

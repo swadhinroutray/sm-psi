@@ -1,4 +1,4 @@
-function sendResponse(res, data) {
+export function sendResponse(res, data) {
   try {
     res.send({ success: true, data: data });
   } catch (error) {
@@ -6,7 +6,7 @@ function sendResponse(res, data) {
   }
 }
 
-function sendError(res, errorData) {
+export function sendError(res, errorData) {
   try {
     res.send({ success: false, data: errorData });
   } catch (error) {
@@ -14,8 +14,3 @@ function sendError(res, errorData) {
     res.send({ success: false, data: "Error Occured while sending error" });
   }
 }
-
-module.exports = {
-  sendError,
-  sendResponse,
-};

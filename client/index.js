@@ -1,10 +1,16 @@
-const path = require("path");
-require("dotenv").config({ path: path.resolve(".env") });
-const express = require("express");
+import * as path from "path";
+import * as dotenv from "dotenv";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+require("dotenv").config({ path: ".env" });
+
+import express from "express";
+import * as db from "./config/mongo.js";
+import routes from "./routes/routes.js";
+
 const app = express();
+
 const port = process.env.CLIENT_PORT || 8000;
-const db = require("./config/mongo");
-const routes = require("./routes/routes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

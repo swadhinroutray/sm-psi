@@ -1,13 +1,9 @@
-const { sendError, sendResponse } = require("../utils/responseHandler");
+import { sendError, sendResponse } from "../utils/responseHandler.js";
 
-async function hello(req, res) {
+export async function Hello(req, res) {
   try {
     return sendResponse(res, "Well Hello");
   } catch (error) {
     return sendError(res, error);
   }
 }
-
-module.exports = {
-  hello,
-};

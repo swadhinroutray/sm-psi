@@ -6,9 +6,12 @@ const app = express();
 const port = process.env.SERVER_PORT || 8001;
 const db = require("./config/mongo");
 const routes = require("./routes/routes");
+const cors = require("cors");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+app.options("*", cors());
 
 db.connectMongo();
 

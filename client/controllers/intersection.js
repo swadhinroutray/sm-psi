@@ -1,35 +1,37 @@
-const { key } = require("../models/keys");
-const { youtuber } = require("../models/youtubers");
-const { sendError, sendResponse } = require("../utils/responseHandler");
-const axios = require("axios");
+import { sendError, sendResponse } from "../utils/responseHandler.js";
+import key from "../models/keys.js";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
 const urls = require("../server_routes.json");
-const FormData = require("form-data");
-const { Blob } = require("buffer");
-const PSI = require("@openmined/psi.js");
-const fse = require("fs-extra");
-async function intersectionCall(req, res) {
+import { FormData, Blob } from "formdata-node";
+import PSI from "@openmined/psi.js/psi_wasm_node.js";
+
+import fetch from "node-fetch";
+
+export async function intersectionCall(req, res) {
   try {
     const psi = await PSI();
 
     const ranks = req.body.ranks;
+    console.log(ranks);
     const PSIKeys = await key.find({});
     //* PSI Logic Implementation
-
     try {
       const client = psi.client.createWithNewKey(PSIKeys[0].revealIntersection);
       const clientRequest = client.createRequest(ranks);
       const serializedClientRequest = clientRequest.serializeBinary();
-      console.log(serializedClientRequest);
+
+      let form = new FormData();
       let buf = Buffer.from(serializedClientRequest);
-      console.log(buf);
-      const form = new FormData();
-      form.append("data", new Blob([buf]), "the_data");
-      console.log(1);
+      let blobData = new Blob([buf]);
+      form.append("data", blobData, "the_data");
+
       fetch(urls.intersection, { method: "POST", body: form })
         .then(function (res) {
           return res.json();
         })
-        .then(function (json) {
+        .then(function (data) {
+          const json = data.data;
           let setupBuffer = Buffer.from(json.setup, "base64");
           let serializedServerSetup = setupBuffer.buffer.slice(
             setupBuffer.byteOffset,
@@ -56,22 +58,16 @@ async function intersectionCall(req, res) {
             deserializedServerResponse
           );
 
-          // intersection contains the index of the items in the
-          // client_data.known_points array. It isn't very useful on its own
-          // console.log('intersection', intersection)
-
-          console.log("\n\nDisplaying intersecting points:\n");
           if (intersection.length > 0) {
             // Display the items in the intersection
-            console.log(
-              intersection.map((item) => client_data.known_points[item])
-            );
+            var response = intersection.map((item) => ranks[item]);
+
+            return sendResponse(res, response);
           } else {
-            console.log("No intersecting points found.");
+            return sendResponse("No intersecting points found.");
           }
         });
       //   console.log(response.data);
-      return sendResponse(res, response);
     } catch (error) {
       return sendError(res, error);
     }
@@ -79,7 +75,3 @@ async function intersectionCall(req, res) {
     return sendError(res, error);
   }
 }
-
-module.exports = {
-  intersectionCall,
-};

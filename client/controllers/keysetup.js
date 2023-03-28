@@ -1,11 +1,14 @@
 //! Define setupKeys function and intersection function
-const { key } = require("../models/keys");
-const { sendError, sendResponse } = require("../utils/responseHandler");
-const axios = require("axios");
+
+import { sendError, sendResponse } from "../utils/responseHandler.js";
+import key from "../models/keys.js";
+import axios from "axios";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
 const urls = require("../server_routes.json");
 
 //* Function to setup client-server keys
-async function keySetup(req, res) {
+export async function keySetup(req, res) {
   try {
     const fpr = req.body.fpr;
     const numClientElements = req.body.numClientElements;
@@ -39,16 +42,12 @@ async function keySetup(req, res) {
   }
 }
 
-async function getKeys(req, res) {
+export async function getKeys(req, res) {
   try {
     const result = await key.find({});
-    console.log(result);
-    return res.sendResponse(res, result);
+
+    return sendResponse(res, result);
   } catch (error) {
     return sendError(res, error);
   }
 }
-module.exports = {
-  keySetup,
-  getKeys,
-};

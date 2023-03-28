@@ -1,5 +1,4 @@
-//? Youtuber Schema
-const mongoose = require("mongoose");
+import * as mongoose from "mongoose";
 
 const youtuberSchema = new mongoose.Schema({
   Rank: {
@@ -29,6 +28,4 @@ const youtuberSchema = new mongoose.Schema({
 });
 
 const youtuber = mongoose.model("youtubers", youtuberSchema);
-module.exports = {
-  youtuber,
-};
+export default youtuber;

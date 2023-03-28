@@ -1,11 +1,10 @@
-const mongoose = require("mongoose");
-const dbName = process.env.CLIENT_DB_NAME;
-const dbPass = process.env.CLIENT_DB_PWD;
-const UNAME = process.env.UNAME;
-const CL_PWD = process.env.CL_PWD;
-
-function connectMongo() {
+// const mongoose = require("mongoose");
+import * as mongoose from "mongoose";
+export function connectMongo() {
   try {
+    const dbName = process.env.CLIENT_DB_NAME;
+    const dbPass = process.env.CLIENT_DB_PWD;
+
     var mongouri = `mongodb://localhost:27017/${dbName}:${dbPass}`; //! For Local Dev
     // var mongouri = `mongodb+srv://${UNAME}:${CL_PWD}@cluster0.gtnn56q.mongodb.net/?retryWrites=true&w=majority`; //! Heroku
     mongoose.connect(
@@ -25,12 +24,12 @@ function connectMongo() {
     console.log(e);
   }
 }
-async function disconnectMongo() {
+export async function disconnectMongo() {
   try {
     await mongoose.connection.close();
     console.log("DB connection terminated");
   } catch (error) {
-    console.log(e);
+    console.log(error);
   }
 }
-module.exports = { connectMongo, disconnectMongo };
+// module.exports = { connectMongo, disconnectMongo };
