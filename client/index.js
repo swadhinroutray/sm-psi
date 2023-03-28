@@ -22,7 +22,6 @@ app.use("/api", routes);
 app.listen(port, () => {
   console.log(`Listening on ${port}`);
 });
-
 process.on("SIGTERM", shutDown);
 process.on("SIGINT", shutDown);
 
