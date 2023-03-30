@@ -5,7 +5,7 @@ const UNAME = process.env.UNAME;
 const CL_PWD = process.env.CL_PWD;
 function connectMongo() {
   try {
-    var mongouri = `mongodb://localhost:27017/${dbName}:${dbPass}`; //! For Local Dev
+    var mongouri = `mongodb://127.0.0.1:27017/${dbName}:${dbPass}`; //! For Local Dev
     // var mongouri = `mongodb+srv://${UNAME}:${CL_PWD}@cluster0.gtnn56q.mongodb.net/?retryWrites=true&w=majority`; //! Heroku
     mongoose.connect(
       mongouri,
@@ -17,7 +17,7 @@ function connectMongo() {
       },
       (err) => {
         if (err) console.log(err);
-        else console.log("Connected to MongoDB");
+        else console.log("Server connected to MongoDB");
       }
     );
   } catch (e) {
@@ -27,7 +27,7 @@ function connectMongo() {
 async function disconnectMongo() {
   try {
     await mongoose.connection.close();
-    console.log("DB connection terminated");
+    console.log("Server-DB connection terminated");
   } catch (error) {
     console.log(e);
   }
