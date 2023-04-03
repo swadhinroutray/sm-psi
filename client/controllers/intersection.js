@@ -13,7 +13,6 @@ export async function intersectionCall(req, res) {
     const psi = await PSI();
 
     const ranks = req.body.ranks;
-    console.log(ranks);
     const PSIKeys = await key.find({});
     //* PSI Logic Implementation
     try {
@@ -58,13 +57,14 @@ export async function intersectionCall(req, res) {
             deserializedServerResponse
           );
 
+          console.log(intersection.length);
           if (intersection.length > 0) {
             // Display the items in the intersection
             var response = intersection.map((item) => ranks[item]);
 
             return sendResponse(res, response);
           } else {
-            return sendResponse("No intersecting points found.");
+            return sendResponse(res, "No intersecting points found.");
           }
         });
       //   console.log(response.data);

@@ -9,7 +9,7 @@ var router = express.Router();
 import * as controller from "../controllers/index.js";
 import { intersectionCall } from "../controllers/intersection.js";
 import { keySetup, getKeys } from "../controllers/keysetup.js";
-
+import { getYoutubers } from "../controllers/fetchCalls.js";
 //*Test Route
 router.get("/hello", Hello);
 
@@ -18,5 +18,6 @@ router.post("/keysetup", keySetup);
 router.get("/getkeys", getKeys);
 
 router.post("/intersection", intersectionCall);
+router.get("/getyoutubers", getYoutubers);
 
 export default router;

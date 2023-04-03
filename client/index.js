@@ -1,6 +1,7 @@
 import * as path from "path";
 import * as dotenv from "dotenv";
 import { createRequire } from "module";
+import cors from "cors";
 const require = createRequire(import.meta.url);
 require("dotenv").config({ path: ".env" });
 
@@ -14,7 +15,8 @@ const port = process.env.CLIENT_PORT || 8000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cors());
+app.options("*", cors());
 db.connectMongo();
 
 app.use("/api", routes);

@@ -21,7 +21,7 @@ startServer() {
 }
 
 startUI(){
-    cd web && yarn dev
+    cd web && npm start
 }
 
 "${@:-default}"
