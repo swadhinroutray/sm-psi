@@ -9,7 +9,7 @@ installAPI() {
 }
 
 concurrentStart(){
-    concurrently "nodemon client/index.js" "nodemon server/index.js"
+    concurrently "nodemon client/index.js" "nodemon server/index.js" "npm start --prefix web"
 }
 startClient() {
     cd client && npm run-script test
