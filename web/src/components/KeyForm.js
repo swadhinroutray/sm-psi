@@ -64,7 +64,6 @@ export default function KeyForm() {
           : revealIntersection,
     };
 
-    console.log(updateObj);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
