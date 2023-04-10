@@ -51,21 +51,23 @@ export async function intersectionCall(req, res) {
             serializedServerSetup
           );
 
-          // Reveal the intersection (only if `revealIntersection` was set to true)
-          const intersection = client.getIntersection(
-            deserializedServerSetup,
-            deserializedServerResponse
-          );
+          if (PSIKeys[0].revealIntersection) {
+            // Reveal the intersection (only if `revealIntersection` was set to true)
+            const intersection = client.getIntersection(
+              deserializedServerSetup,
+              deserializedServerResponse
+            );
+            console.log(intersection.length);
+            if (intersection.length > 0) {
+              // Display the items in the intersection
+              var response = intersection.map((item) => ranks[item]);
 
-          console.log(intersection.length);
-          if (intersection.length > 0) {
-            // Display the items in the intersection
-            var response = intersection.map((item) => ranks[item]);
-
-            return sendResponse(res, response);
-          } else {
-            return sendResponse(res, "No intersecting points found.");
+              return sendResponse(res, response);
+            } else {
+              return sendResponse(res, "No intersecting points found.");
+            }
           }
+          return sendResponse(res, "Intersection check complete");
         });
       //   console.log(response.data);
     } catch (error) {

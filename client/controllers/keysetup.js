@@ -51,3 +51,36 @@ export async function getKeys(req, res) {
     return sendError(res, error);
   }
 }
+
+export async function updateKeys(req, res) {
+  try {
+    const fpr = await Number(req.body.fpr);
+    const numClientElements = req.body.numClientElements;
+    const numTotalElements = req.body.numTotalElements;
+    const revealIntersection = req.body.revealIntersection;
+    const keyObj = {
+      fpr: fpr,
+      numClientElements: numClientElements,
+      numTotalElements: numTotalElements,
+      revealIntersection: revealIntersection,
+    };
+
+    try {
+      const response = await axios.post(urls.keyupdate, keyObj);
+
+      if (response.data.success == false)
+        return sendResponse(res, "Key update error, please try again later!");
+
+      var result = await key.updateMany({}, keyObj);
+
+      if (!result) {
+        return sendError(res, "Key Setup Failed");
+      }
+      return sendResponse(res, "Keys Updated");
+    } catch (error) {
+      console.log(error);
+    }
+  } catch (error) {
+    return sendError(res, error);
+  }
+}

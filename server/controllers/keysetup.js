@@ -28,6 +28,32 @@ async function keySetup(req, res) {
   }
 }
 
+async function keyUpdate(req, res) {
+  try {
+    const fpr = Number(req.body.fpr);
+    const numClientElements = req.body.numClientElements;
+    const numTotalElements = req.body.numTotalElements;
+    const revealIntersection = req.body.revealIntersection;
+    const keyObj = {
+      fpr: fpr,
+      numClientElements: numClientElements,
+      numTotalElements: numTotalElements,
+      revealIntersection: revealIntersection,
+    };
+    try {
+      result = await key.updateMany({}, keyObj);
+      if (!result) {
+        return sendError(res, "Key Setup Failed");
+      }
+      return sendResponse(res, "Updated Keys");
+    } catch (error) {
+      console.log(error);
+    }
+  } catch (error) {
+    return sendError(res, error);
+  }
+}
 module.exports = {
   keySetup,
+  keyUpdate,
 };

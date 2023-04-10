@@ -16,4 +16,5 @@ router.post(
 );
 // router.post("/intersection", controller.intersectionCall);
 
+router.post("/keyupdate", controller.keyUpdate);
 module.exports = router;
