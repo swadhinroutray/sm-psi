@@ -1,19 +1,19 @@
 import * as React from "react";
-import Chip from "@mui/material/Chip";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Loader from "./Loader";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { Button, InputLabel } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Search() {
   const [youtubers, setYoutubers] = useState([]);
   const [loader, setLoader] = React.useState(true);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [refresh, setrefreshState] = useState(false);
-  const elementRef = useRef(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -49,7 +49,8 @@ export default function Search() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        alert(data.data);
+        toast(data.data);
+        //TODO: Map array to retrieve username and show
         setrefreshState(false);
       });
   }
@@ -82,6 +83,7 @@ export default function Search() {
         />
         <Button type="submit">Check Intersection</Button>
       </Stack>
+      <ToastContainer />
     </Box>
   );
 }

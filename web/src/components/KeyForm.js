@@ -10,8 +10,9 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function KeyForm() {
   const [keys, setKeys] = useState([]);
@@ -38,7 +39,7 @@ export default function KeyForm() {
       setLoader(false);
     }
     fetchData();
-  }, [fpr]);
+  }, [fpr, numClients, maxElements, revealIntersection]);
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -49,15 +50,15 @@ export default function KeyForm() {
 
   function submitHandler(event) {
     event.preventDefault();
-
     var updateObj = {
       fpr: inputFPR.current ? inputFPR.current : fpr,
       numClientElements: inputMaxClients.current
         ? inputMaxClients.current
         : numClients,
-      numTotalElements: inputMaxElements.current
-        ? inputMaxClients.current
-        : maxElements,
+      numTotalElements:
+        inputMaxElements.current !== maxElements
+          ? inputMaxElements.current
+          : maxElements,
       revealIntersection:
         inputRevealInterection.current !== undefined
           ? inputRevealInterection.current
@@ -76,6 +77,7 @@ export default function KeyForm() {
         setNumClients(updateObj.numClientElements);
         setMaxElements(updateObj.numTotalElements);
         setRevealIntersection(updateObj.revealIntersection);
+        toast("Keys Have been updated");
       });
   }
   return loader == true ? (
@@ -157,6 +159,7 @@ export default function KeyForm() {
           </Item>
         </Grid>
       </Grid>
+      <ToastContainer />
     </Box>
   );
 }
