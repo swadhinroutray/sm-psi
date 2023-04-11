@@ -29,12 +29,9 @@ export default function Search() {
 
   function submitHandler(event) {
     event.preventDefault();
-    console.log(selectedOptions);
     var output = [];
     for (var i = 0; i < selectedOptions.length; ++i)
       output.push(selectedOptions[i]["Rank"]);
-
-    console.log(output);
 
     var rankObj = {
       ranks: output,
@@ -48,7 +45,6 @@ export default function Search() {
     fetch("http://127.0.0.1:8000/api/intersection", requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log(typeof data.data);
         if (typeof data.data === "object") {
           let commonarray = [];
           for (let index = 0; index < data.data.length; index++) {
