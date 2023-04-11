@@ -48,9 +48,26 @@ export default function Search() {
     fetch("http://127.0.0.1:8000/api/intersection", requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        toast(data.data);
-        //TODO: Map array to retrieve username and show
+        console.log(typeof data.data);
+        if (typeof data.data === "object") {
+          let commonarray = [];
+          console.log(data.data);
+          for (let index = 0; index < data.data.length; index++) {
+            var common = selectedOptions.filter((obj) => {
+              return obj.Rank === data.data[index];
+            });
+            commonarray.push(common[0]);
+          }
+          console.log(commonarray);
+          const usernames = commonarray.map(function (obj) {
+            return obj["username"];
+          });
+
+          toast("You have: " + usernames + " in common!");
+        } else {
+          toast(data.data);
+        }
+
         setrefreshState(false);
       });
   }
