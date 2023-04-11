@@ -51,14 +51,12 @@ export default function Search() {
         console.log(typeof data.data);
         if (typeof data.data === "object") {
           let commonarray = [];
-          console.log(data.data);
           for (let index = 0; index < data.data.length; index++) {
             var common = selectedOptions.filter((obj) => {
               return obj.Rank === data.data[index];
             });
             commonarray.push(common[0]);
           }
-          console.log(commonarray);
           const usernames = commonarray.map(function (obj) {
             return obj["username"];
           });
