@@ -15,6 +15,7 @@ export async function intersectionCall(req, res) {
     const ranks = req.body.ranks;
     console.log(ranks);
     const PSIKeys = await key.find({});
+
     //* PSI Logic Implementation
     try {
       const client = psi.client.createWithNewKey(PSIKeys[0].revealIntersection);
