@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 import { Button, InputLabel } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { Link } from "react-router-dom";
 export default function Search() {
   const [youtubers, setYoutubers] = useState([]);
   const [loader, setLoader] = React.useState(true);
@@ -70,6 +70,11 @@ export default function Search() {
     <Loader />
   ) : (
     <Box component="form" onSubmit={submitHandler}>
+      <div>
+        <Link to={{ pathname: "/keys" }}>
+          <Button type="button">Configure keys</Button>
+        </Link>
+      </div>
       <Stack spacing={3} sx={{ width: 500 }}>
         <InputLabel>
           <h3>Add youtubers that you want to check intersection for!</h3>
